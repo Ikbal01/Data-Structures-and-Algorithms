@@ -59,28 +59,16 @@ public class Labyrinth {
             int size = nextToVisit.size();
 
             if (node.x + 1 < matrix.length && matrix[node.x + 1][node.y].equals("0")) {
-                if (!visited[node.x + 1][node.y]) {
-                    nextToVisit.add(new Node(node.x + 1, node.y));
-                    visited[node.x + 1][node.y] = true;
-                }
+                addNextToVisit(node.x + 1, node.y, visited, nextToVisit);
             }
             if (node.x - 1 >= 0 && matrix[node.x - 1][node.y].equals("0")) {
-                if (!visited[node.x - 1][node.y]) {
-                    nextToVisit.add(new Node(node.x - 1, node.y));
-                    visited[node.x - 1][node.y] = true;
-                }
+                addNextToVisit(node.x - 1, node.y, visited, nextToVisit);
             }
             if (node.y + 1 < matrix[0].length && matrix[node.x][node.y + 1].equals("0")) {
-                if (!visited[node.x][node.y + 1]) {
-                    nextToVisit.add(new Node(node.x, node.y + 1));
-                    visited[node.x][node.y + 1] = true;
-                }
+                addNextToVisit(node.x, node.y + 1, visited, nextToVisit);
             }
             if (node.y - 1 >= 0 && matrix[node.x][node.y - 1].equals("0")) {
-                if (!visited[node.x][node.y - 1]) {
-                    nextToVisit.add(new Node(node.x, node.y - 1));
-                    visited[node.x][node.y - 1] = true;
-                }
+                addNextToVisit(node.x, node.y - 1, visited, nextToVisit);
             }
 
             counterTwo += (nextToVisit.size() - size);
@@ -94,6 +82,13 @@ public class Labyrinth {
             pass--;
         }
         return -1;
+    }
+
+    public static void addNextToVisit(int x, int y, boolean[][] visited, LinkedList<Node> nextToVisit) {
+        if (!visited[x][y]) {
+            nextToVisit.add(new Node(x, y));
+            visited[x][y] = true;
+        }
     }
 
     private static class Node {
