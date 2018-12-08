@@ -160,20 +160,16 @@ public class AVL {
     }
 
     private boolean contains(Node root, int value) {
+        if (root == null) {
+            return false;
+        }
+
         if (value == root.value) {
             return true;
         } else if (value < root.value) {
-            if (root.left == null) {
-                return false;
-            } else {
-                return contains(root.left, value);
-            }
+            return contains(root.left, value);
         } else {
-            if (root.right == null) {
-                return false;
-            } else {
-                return contains(root.right, value);
-            }
+            return contains(root.right, value);
         }
     }
 
