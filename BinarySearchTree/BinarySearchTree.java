@@ -8,9 +8,10 @@ public class BinarySearchTree {
     private class Node {
         private Node left;
         private Node right;
-        private int data;
-        public Node(int data) {
-            this.data = data;
+        private int value;
+
+        public Node(int value) {
+            this.value = value;
         }
     }
 
@@ -23,7 +24,7 @@ public class BinarySearchTree {
     }
 
     private void insert(Node root, int value) {
-        if (value <= root.data) {
+        if (value <= root.value) {
             if (root.left == null) {
                 root.left = new Node(value);
             } else {
@@ -45,9 +46,9 @@ public class BinarySearchTree {
     private Node delete(Node root, int value) {
         if (root == null) {
             return root;
-        } else if (value < root.data) {
+        } else if (value < root.value) {
             root.left = delete(root.left, value);
-        } else if (value > root.data) {
+        } else if (value > root.value) {
             root.right = delete(root.right, value);
         } else {
             if (root.left == null && root.right == null) {
@@ -57,9 +58,9 @@ public class BinarySearchTree {
             } else if (root.right == null) {
                 return root.left;
             } else {
-                Node temp = findMinValue(root.right);
-                root.data = temp.data;
-                root.right = delete(root.right, temp.data);
+                Node temp = findMinValueNode(root.right);
+                root.value = temp.value;
+                root.right = delete(root.right, temp.value);
             }
         }
         return root;
@@ -84,27 +85,27 @@ public class BinarySearchTree {
     }
 
     public int findMinValue() {
-        return findMinValue(root).data;
+        return findMinValueNode(root).value;
     }
 
-    private Node findMinValue(Node root) {
-        Node minValue = root;
-        while (minValue.left != null) {
-            minValue = minValue.left;
+    private Node findMinValueNode(Node root) {
+        Node minValueNode = root;
+        while (minValueNode.left != null) {
+            minValueNode = minValueNode.left;
         }
-        return minValue;
+        return minValueNode;
     }
 
     public int findMaxValue() {
-        return findMaxValue(root).data;
+        return findMaxValueNode(root).value;
     }
 
-    private Node findMaxValue(Node root) {
-        Node maxValue = root;
-        while (maxValue.right != null) {
-            maxValue = maxValue.right;
+    private Node findMaxValueNode(Node root) {
+        Node maxValueNode = root;
+        while (maxValueNode.right != null) {
+            maxValueNode = maxValueNode.right;
         }
-        return maxValue;
+        return maxValueNode;
     }
 
     public void printInOrder() {
@@ -114,7 +115,7 @@ public class BinarySearchTree {
     private void printInOrder(Node root) {
         if (root != null) {
             printInOrder(root.left);
-            System.out.println(root.data);
+            System.out.println(root.value);
             printInOrder(root.right);
         }
     }
@@ -125,7 +126,7 @@ public class BinarySearchTree {
 
     private void printPreOrder(Node root) {
         if (root != null) {
-            System.out.println(root.data);
+            System.out.println(root.value);
             printPreOrder(root.left);
             printPreOrder(root.right);
         }
@@ -139,8 +140,7 @@ public class BinarySearchTree {
         if (root != null) {
             printPostOrder(root.left);
             printPostOrder(root.right);
-            System.out.println(root.data);
+            System.out.println(root.value);
         }
     }
 }
-
