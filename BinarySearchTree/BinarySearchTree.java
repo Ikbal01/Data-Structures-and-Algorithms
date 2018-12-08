@@ -70,20 +70,16 @@ public class BinarySearchTree {
     }
 
     private boolean contains(Node root, int value) {
-        if (value == root.data) {
+        if (root == null) {
+            return false;
+        }
+
+        if (value == root.value) {
             return true;
-        } else if (value < root.data) {
-            if (root.left == null) {
-                return false;
-            } else {
-                return contains(root.left, value);
-            }
+        } else if (value < root.value) {
+            return contains(root.left, value);
         } else {
-            if (root.right == null) {
-                return false;
-            } else {
-                return contains(root.right, value);
-            }
+            return contains(root.right, value);
         }
     }
 
